@@ -1,0 +1,67 @@
+.hero {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--color-white);
+    background:
+        linear-gradient(135deg, hsla(15, 65%, 25%, 0.6) 0%, hsla(25, 40%, 15%, 0.6) 100%),
+        url("https://i.pinimg.com/736x/8a/34/9c/8a349c87e1546e73d48d29cf1cf72c4a.jpg");
+    background-size: cover;
+    background-position: center;
+    padding-top: 80px;
+    /* navbar height */
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    margin: 15px 0 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hero-btn {
+    padding: 12px 35px;
+    border: none;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    cursor: pointer;
+    background: var(--color-primary);
+    color: var(--color-white);
+    transition: var(--transition-normal);
+}
+
+.hero-btn:hover {
+    opacity: 0.9;
+}
+
+.hero-btn.reserve {
+    background: transparent;
+    /* transparent background */
+    border: 3px solid var(--color-white);
+    /* white border */
+    color: var(--color-white);
+    /* white text */
+    border-radius: 0.5rem;
+    /* small corner radius */
+    padding: 15px 25px;
+    /* slightly squarer shape */
+}
+
+/* Hover effect */
+.hero-btn.reserve:hover {
+    background: var(--color-white);
+    /* fill white on hover */
+    color: var(--color-primary);
+    /* text becomes primary color */
+}

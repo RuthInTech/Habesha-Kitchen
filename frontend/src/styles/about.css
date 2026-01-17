@@ -1,0 +1,158 @@
+.about-page {
+    padding-top: 80px;
+    /* navbar height */
+    font-family: var(--font-body);
+    color: var(--color-foreground);
+    background: var(--color-background);
+}
+
+/* Hero section */
+.about-hero {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg,
+            hsla(15, 65%, 25%, 0.6) 0%,
+            hsla(25, 40%, 15%, 0.6) 100%),
+        url("https://i.pinimg.com/736x/8a/34/9c/8a349c87e1546e73d48d29cf1cf72c4a.jpg");
+    background-size: cover;
+    background-position: center;
+    color: var(--color-white);
+    padding: 2rem;
+}
+
+.about-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: fadeUp 1s ease forwards;
+}
+
+.about-hero p {
+    font-size: 1.3rem;
+    max-width: 700px;
+    animation: fadeUp 1.2s ease forwards;
+}
+
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Story Section */
+.about-section.story {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 4rem auto;
+    align-items: center;
+}
+
+.about-section.story img {
+    flex: 1 1 300px;
+    max-width: 100%;
+    max-height: 250px;
+    /* unified height */
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.about-section.story img:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 12px 30px -5px hsla(15, 65%, 30%, 0.4);
+}
+
+.about-section.story .text {
+    flex: 1 1 500px;
+}
+
+.about-section.story h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+}
+
+.about-section.story p {
+    line-height: 1.7;
+    color: var(--color-foreground);
+}
+
+/* Mission & Vision cards */
+.about-section.mission {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 4rem 1rem;
+}
+
+.about-section.mission .card {
+    background: var(--color-card);
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    flex: 1 1 300px;
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+}
+
+.about-section.mission .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px -5px hsla(15, 65%, 30%, 0.4);
+}
+
+.about-section.mission .card h3 {
+    color: var(--color-primary);
+    margin-bottom: 0.8rem;
+}
+
+.about-section.mission .card p {
+    color: var(--color-foreground);
+    line-height: 1.6;
+}
+
+/* Ethiopian Flavors Grid */
+.about-section.culture {
+    text-align: center;
+    margin: 4rem auto;
+    max-width: 1000px;
+}
+
+.about-section.culture h2 {
+    color: var(--color-primary);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.flavors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.flavors-grid img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.flavors-grid img:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 12px 30px -5px hsla(15, 65%, 30%, 0.35);
+}
