@@ -9,6 +9,7 @@
     /* White navbar */
     box-shadow: var(--shadow-md);
     position: fixed;
+    z-index: 1000;
 }
 
 .nav-left {
