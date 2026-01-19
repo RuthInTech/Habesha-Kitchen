@@ -25,55 +25,20 @@ export default function Menu() {
 
     return (
         <div className="menu-page" style={{ paddingTop: "80px" }}>
-            {/* Hero Section */}
-            <div className="menu-hero">
-                <div className="menu-hero-content">
-                    <h1>Our Menu</h1>
-                    <p>Discover the authentic flavors of Ethiopia</p>
-                    <div className="menu-hero-decoration"></div>
-                </div>
+            <div className="menu-filters">
+                <button onClick={() => setFilter("all")} className={filter === "all" ? "active" : ""}>All</button>
+                <button onClick={() => setFilter("meat")} className={filter === "meat" ? "active" : ""}>Meat</button>
+                <button onClick={() => setFilter("vegetarian")} className={filter === "vegetarian" ? "active" : ""}>Vegetarian</button>
+                <button onClick={() => setFilter("beverages")} className={filter === "beverages" ? "active" : ""}>Beverages</button>
             </div>
 
-            {/* Filters Section */}
-            <div className="menu-filters-wrapper">
-                <div className="menu-filters">
-                    <button onClick={() => setFilter("all")} className={filter === "all" ? "active" : ""}>
-                        <span>All</span>
-                    </button>
-                    <button onClick={() => setFilter("meat")} className={filter === "meat" ? "active" : ""}>
-                        <span>Meat</span>
-                    </button>
-                    <button onClick={() => setFilter("vegetarian")} className={filter === "vegetarian" ? "active" : ""}>
-                        <span>Vegetarian</span>
-                    </button>
-                    <button onClick={() => setFilter("beverages")} className={filter === "beverages" ? "active" : ""}>
-                        <span>Beverages</span>
-                    </button>
-                </div>
-            </div>
-
-            {/* Menu Grid */}
             <div className="menu-container">
-                {filteredItems.map((item, index) => (
-                    <div
-                        key={item.id}
-                        className="menu-card"
-                        style={{ animationDelay: `${index * 0.1}s` }}
-                    >
-                        <div className="menu-card-image-wrapper">
-                            <img src={item.image} alt={item.name} />
-                            <div className="menu-card-overlay">
-                                <span className="menu-card-category">{item.category}</span>
-                            </div>
-                        </div>
-                        <div className="menu-card-content">
-                            <h3>{item.name}</h3>
-                            <p>{item.description}</p>
-                            <div className="menu-card-footer">
-                                <span className="menu-card-price">{item.price}</span>
-
-                            </div>
-                        </div>
+                {filteredItems.map(item => (
+                    <div key={item.id} className="menu-card">
+                        <img src={item.image} alt={item.name} />
+                        <h3>{item.name}</h3>
+                        <p>{item.description}</p>
+                        <span>{item.price}</span>
                     </div>
                 ))}
             </div>

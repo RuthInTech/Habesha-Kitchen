@@ -1,24 +1,75 @@
+import { useState } from "react";
 import "../styles/contact.css";
 
 export default function Contact() {
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        date: "",
+        time: "",
+        notes: "",
+    });
+
+    const [status, setStatus] = useState("");
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setStatus("Sending...");
+
+        try {
+            const response = await fetch("http://localhost:5000/reserve", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                setStatus("Reservation successful! 🍽️");
+                setFormData({
+                    name: "",
+                    email: "",
+                    phone: "",
+                    date: "",
+                    time: "",
+                    notes: ""
+                });
+            } else {
+                setStatus(data.message || "Something went wrong.");
+            }
+
+        } catch (error) {
+            console.error(error);
+            setStatus("Cannot connect to server 😭");
+        }
+    };
+
     return (
         <div className="contact-page">
 
-            {/* HERO */}
             <section className="contact-hero">
                 <h1>Get in Touch</h1>
                 <p>We'd love to welcome you to Habesha Kitchen</p>
             </section>
 
-            {/* CONTENT */}
             <section className="contact-wrapper">
 
                 {/* LEFT */}
                 <div className="contact-details">
                     <h2>Visit Us</h2>
-
                     <p>
-                        Step into a warm Ethiopian dining experience filled with tradition,
+                        Experience authentic Ethiopian cuisine filled with warmth,
                         culture, and unforgettable flavors.
                     </p>
 
@@ -26,7 +77,7 @@ export default function Contact() {
                         <span>📍</span>
                         <div>
                             <h4>Location</h4>
-                            <p>Ethiopia, Addis Ababa, Bole Area</p>
+                            <p>Addis Ababa, Bole</p>
                         </div>
                     </div>
 
@@ -34,7 +85,7 @@ export default function Contact() {
                         <span>📞</span>
                         <div>
                             <h4>Phone</h4>
-                            <p> +251 945879653</p>
+                            <p>+251 945 879 653</p>
                         </div>
                     </div>
 
@@ -42,7 +93,7 @@ export default function Contact() {
                         <span>📧</span>
                         <div>
                             <h4>Email</h4>
-                            <p><a href="#">lehasetruth@gmail.com</a></p>
+                            <p>lehasetruth@gmail.com</p>
                         </div>
                     </div>
                 </div>
@@ -51,20 +102,60 @@ export default function Contact() {
                 <div className="reserve-card">
                     <h2>Reserve a Table</h2>
 
-                    <form>
-                        <input type="text" placeholder="Full Name" />
-                        <input type="email" placeholder="Email" />
-                        <input type="tel" placeholder="Phone Number" />
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            name="name"
+                            placeholder="Full Name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            required
+                        />
+
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                        />
+
+                        <input
+                            name="phone"
+                            placeholder="Phone Number"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            required
+                        />
 
                         <div className="row">
-                            <input type="date" />
-                            <input type="time" />
+                            <input
+                                type="date"
+                                name="date"
+                                value={formData.date}
+                                onChange={handleChange}
+                                required
+                            />
+
+                            <input
+                                type="time"
+                                name="time"
+                                value={formData.time}
+                                onChange={handleChange}
+                            />
                         </div>
 
-                        <textarea rows="4" placeholder="Special requests (optional)" />
+                        <textarea
+                            name="notes"
+                            placeholder="Special requests"
+                            value={formData.notes}
+                            onChange={handleChange}
+                        />
 
-                        <button>Reserve Now</button>
+                        <button type="submit">Reserve Now</button>
                     </form>
+
+                    {status && <p className="form-status">{status}</p>}
                 </div>
 
             </section>

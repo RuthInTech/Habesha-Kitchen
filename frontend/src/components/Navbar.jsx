@@ -16,7 +16,11 @@ export default function Navbar() {
                 <NavLink to="/contact">Contact</NavLink>
             </div>
 
-            <button className="reserve-btn">Reserve Table</button>
+            <button className="reserve-btn reserve" onClick={() => navigate("/contact")} >
+                Reserve Table
+            </button>
+
+
         </nav>
     );
 }
