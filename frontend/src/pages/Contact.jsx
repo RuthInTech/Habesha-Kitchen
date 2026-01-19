@@ -25,7 +25,7 @@ export default function Contact() {
         setStatus("Sending...");
 
         try {
-            const response = await fetch("https://habesha-kitchen.onrender.com/reserve", {
+            const response = await fetch("http://localhost:5000/reserve", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
