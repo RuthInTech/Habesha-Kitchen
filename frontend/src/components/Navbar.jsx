@@ -1,7 +1,9 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "../styles/navbar.css";
 
 export default function Navbar() {
+    const navigate = useNavigate(); // ✅ THIS WAS MISSING
+
     return (
         <nav className="navbar">
             <div className="nav-left">
@@ -16,11 +18,12 @@ export default function Navbar() {
                 <NavLink to="/contact">Contact</NavLink>
             </div>
 
-            <button className="reserve-btn reserve" onClick={() => navigate("/contact")} >
+            <button
+                className="reserve-btn"
+                onClick={() => navigate("/contact")}
+            >
                 Reserve Table
             </button>
-
-
         </nav>
     );
 }
