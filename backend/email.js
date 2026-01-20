@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // function to send reservation email
-export async function sendReservationEmail({ name, email, date, time, notes }) {
+export async function sendReservationEmail({ name, email, phone, date, time, notes }) {
     try {
         const mailOptions = {
             from: `"Habesha Kitchen" <${process.env.EMAIL_USER}>`,
@@ -25,7 +25,8 @@ export async function sendReservationEmail({ name, email, date, time, notes }) {
         <p>Thank you for your reservation at Habesha Kitchen!</p>
         <p><strong>Date:</strong> ${date}</p>
         <p><strong>Time:</strong> ${time}</p>
-        ${notes ? `<p><strong>Notes:</strong> ${notes}</p>` : ""}
+        ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ""}
+        ${notes ? `<p><strong>Special Requests:</strong> ${notes}</p>` : ""}
         <p>We look forward to serving you.</p>
         <br/>
         <p>– Habesha Kitchen Team</p>

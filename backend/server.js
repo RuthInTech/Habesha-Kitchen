@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/reserve", async (req, res) => {
-    const { name, email, date, time, notes } = req.body;
+    const { name, email, phone, date, time, notes } = req.body;
 
     if (!name || !email || !date || !time) {
         return res.status(400).json({
@@ -37,6 +37,7 @@ app.post("/reserve", async (req, res) => {
                 {
                     name,
                     email,
+                    phone: phone || null,
                     reservation_date: date,
                     reservation_time: time,
                     notes: notes || null,
@@ -54,6 +55,7 @@ app.post("/reserve", async (req, res) => {
         await sendReservationEmail({
             name,
             email,
+            phone,
             date,
             time,
             notes,
