@@ -16,7 +16,7 @@ export default function Contact() {
     const handleChange = (e) => {
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         });
     };
 
@@ -25,30 +25,36 @@ export default function Contact() {
         setStatus("Sending...");
 
         try {
-            const response = await fetch("http://localhost:5000/reserve", {
+            const response = await fetch("http://localhost:5000/api/mail/send", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    date: `${formData.date} at ${formData.time}`,
+                    people: "Not specified",
+                    phone: formData.phone,
+                    notes: formData.notes,
+                }),
             });
 
             const data = await response.json();
 
             if (response.ok) {
-                setStatus("Reservation successful! 🍽️");
+                setStatus("Reservation sent successfully 🍽️");
                 setFormData({
                     name: "",
                     email: "",
                     phone: "",
                     date: "",
                     time: "",
-                    notes: ""
+                    notes: "",
                 });
             } else {
-                setStatus(data.message || "Something went wrong.");
+                setStatus(data.error || "Something went wrong");
             }
-
         } catch (error) {
             console.error(error);
             setStatus("Cannot connect to server 😭");
@@ -57,14 +63,12 @@ export default function Contact() {
 
     return (
         <div className="contact-page">
-
             <section className="contact-hero">
                 <h1>Get in Touch</h1>
                 <p>We'd love to welcome you to Habesha Kitchen</p>
             </section>
 
             <section className="contact-wrapper">
-
                 {/* LEFT */}
                 <div className="contact-details">
                     <h2>Visit Us</h2>
@@ -99,7 +103,7 @@ export default function Contact() {
                 </div>
 
                 {/* RIGHT */}
-                <div className="reserve-card" >
+                <div className="reserve-card">
                     <h2>Reserve a Table</h2>
 
                     <form onSubmit={handleSubmit}>
@@ -157,7 +161,6 @@ export default function Contact() {
 
                     {status && <p className="form-status">{status}</p>}
                 </div>
-
             </section>
         </div>
     );
