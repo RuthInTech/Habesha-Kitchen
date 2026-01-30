@@ -25,6 +25,7 @@ export default function Contact() {
         setStatus("Sending...");
 
         try {
+            // Send all data as JSON to backend
             const response = await fetch("http://localhost:5000/api/mail/send", {
                 method: "POST",
                 headers: {
@@ -33,9 +34,9 @@ export default function Contact() {
                 body: JSON.stringify({
                     name: formData.name,
                     email: formData.email,
-                    date: `${formData.date} at ${formData.time}`,
-                    people: "Not specified",
                     phone: formData.phone,
+                    date: formData.date,
+                    time: formData.time,
                     notes: formData.notes,
                 }),
             });
@@ -44,6 +45,8 @@ export default function Contact() {
 
             if (response.ok) {
                 setStatus("Reservation sent successfully 🍽️");
+
+                // Reset form
                 setFormData({
                     name: "",
                     email: "",
@@ -53,7 +56,7 @@ export default function Contact() {
                     notes: "",
                 });
             } else {
-                setStatus(data.error || "Something went wrong");
+                setStatus(data.error || "Something went wrong 😢");
             }
         } catch (error) {
             console.error(error);
@@ -63,13 +66,14 @@ export default function Contact() {
 
     return (
         <div className="contact-page">
+            {/* Hero */}
             <section className="contact-hero">
                 <h1>Get in Touch</h1>
                 <p>We'd love to welcome you to Habesha Kitchen</p>
             </section>
 
             <section className="contact-wrapper">
-                {/* LEFT */}
+                {/* LEFT: Contact Details */}
                 <div className="contact-details">
                     <h2>Visit Us</h2>
                     <p>
@@ -102,7 +106,7 @@ export default function Contact() {
                     </div>
                 </div>
 
-                {/* RIGHT */}
+                {/* RIGHT: Reservation Form */}
                 <div className="reserve-card">
                     <h2>Reserve a Table</h2>
 
