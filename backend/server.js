@@ -3,15 +3,12 @@ import cors from "cors";
 import mailRouter from "./routes/mail.js";
 
 const app = express();
-const PORT = 5000;
 
-// Middleware
-app.use(cors());
+app.use(cors()); // This is vital for your React app to connect!
 app.use(express.json());
 
-// Routes
 app.use("/api/mail", mailRouter);
 
-app.listen(PORT, () => {
-    console.log(`Backend running on http://localhost:${PORT}`);
+app.listen(5000, () => {
+    console.log("Backend running on http://localhost:5000");
 });

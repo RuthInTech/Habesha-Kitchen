@@ -1,26 +1,24 @@
-// backend/database.js
 import Database from "better-sqlite3";
-import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
-// Create database file if it doesn't exist
-const dbFile = "./reservations.db";
-if (!fs.existsSync(dbFile)) {
-    fs.writeFileSync(dbFile, "");
-}
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const db = new Database(dbFile);
+// We are strictly using habesha.db
+const db = new Database(path.join(__dirname, "habesha.db"));
 
-// Create table if it doesn't exist
-db.prepare(`
+// Create the table
+db.exec(`
   CREATE TABLE IF NOT EXISTS reservations (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    email TEXT NOT NULL,
-    phone TEXT NOT NULL,
-    date TEXT NOT NULL,
+    name TEXT,
+    email TEXT,
+    phone TEXT,
+    date TEXT,
     time TEXT,
-    notes TEXT
+    notes TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   )
-`).run();
+`);
 
 export default db;
