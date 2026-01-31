@@ -4,10 +4,8 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// We are strictly using habesha.db
 const db = new Database(path.join(__dirname, "habesha.db"));
 
-// Create the table
 db.exec(`
   CREATE TABLE IF NOT EXISTS reservations (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
